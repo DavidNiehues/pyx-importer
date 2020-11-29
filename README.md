@@ -10,6 +10,16 @@ Copy importer.template.properties to importer.properties and fill in, at the min
 The deckinfo block is optional, but makes the decks "look nicer" in PYX. You can also assign multiple ids to the same name to combine them, if your input source isn't self-consistent.
 
 
+## EXCEL FORMAT
+
+Each sheet contains etiher only black or only white cards as specified in the configuration file (```importer.properties``` by default).
+For each sheet there are two ways of formatting it that can also be configured via the configuration file.
+1. Put the identifier of the card deck the cards belong to in the first row in the first column as a header. Then put all the cards under the header in the same column. You then need to set ```heading_named_count=1``` for that sheet in the configuration file.
+2. (I did not test this way, it seems to be this way by reading the code). Leave the first row of the sheet empty and after that put each card in a single row and the identifier of the card deck in the column right next to it. If you start witht the first row, you need to set ```next_column_named_count=1``` for that sheet.
+
+There seems to be the option to have several columns of cards in each sheet and to combine the two ways of formatting the sheets with each other. However, I did not try these out since the first approach described above works well.
+
+
 ## BUILDING:
 
 You must have PYX installed in your local Maven repository. This is most easily accomplished by checking it out, and running ```mvn clean install```. The Hibernate ORM classes are used directly from that project.
